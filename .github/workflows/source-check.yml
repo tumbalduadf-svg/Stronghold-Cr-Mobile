@@ -1,0 +1,53 @@
+name: Source checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-source:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Validate Python syntax
+        run: python -m compileall -q tools tests
+
+      - name: Validate JSON configuration
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          for path in sorted(Path('config').glob('*.json')):
+              json.loads(path.read_text(encoding='utf-8'))
+              print(f'OK {path}')
+          json.loads(Path('dependencies.json').read_text(encoding='utf-8'))
+          print('OK dependencies.json')
+          PY
+
+      - name: Validate Android XML
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          from pathlib import Path
+          for path in sorted(Path('android').rglob('*.xml')):
+              ET.parse(path)
+              print(f'OK {path}')
+          PY
+
+      - name: Check launcher branding
+        run: |
+          grep -q 'Stronghold Cr Mobile' android/app/AndroidManifest.xml
+          grep -q 'Stronghold Cr Mobile' android/app/src/org/stronghold/port/LauncherActivity.java
+          echo 'Launcher branding checks passed.'
