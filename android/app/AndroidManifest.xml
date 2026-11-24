@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="org.stronghold.port"
     android:versionCode="33" android:versionName="1.1-release">
@@ -11,7 +12,7 @@
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
   <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
   <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE" />
-  <application android:icon="@mipmap/ic_classic" android:roundIcon="@mipmap/ic_classic" android:label="Stronghold Launcher" android:debuggable="false"
+  <application android:icon="@mipmap/ic_classic" android:roundIcon="@mipmap/ic_classic" android:label="Stronghold Cr Mobile" android:debuggable="false"
       android:allowAudioPlaybackCapture="true"
       android:allowBackup="false" android:extractNativeLibs="true"
       android:requestLegacyExternalStorage="true" android:hasCode="true"
@@ -35,7 +36,7 @@
         android:process=":stronghold" android:taskAffinity="org.stronghold.port.stronghold"
         android:configChanges="orientation|screenSize|keyboardHidden|keyboard|navigation|screenLayout|uiMode"
         android:launchMode="singleTask" />
-    <activity android:name=".LauncherActivity" android:label="Stronghold Launcher" android:exported="true" android:screenOrientation="fullSensor"
+    <activity android:name=".LauncherActivity" android:label="Stronghold Cr Mobile" android:exported="true" android:screenOrientation="fullSensor"
         android:theme="@style/Stronghold.Launcher"
         android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|keyboard|navigation|uiMode"
         android:launchMode="singleTask">
